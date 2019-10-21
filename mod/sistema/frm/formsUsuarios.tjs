@@ -1,0 +1,192 @@
+
+Ext.apply(Ext.form.VTypes, {
+   senha: function(value, field)
+   {
+      if (field.initialPasswordField)
+      {
+         var pwd = Ext.getCmp(field.initialPasswordField);
+         this.senhaText = 'Senhas informadas n&atilde;o s&atilde;o iguais.';
+         return (value == pwd.getValue());
+      }
+
+      this.senhaText = 'A senha deve ter pelo menos 5 caracteres, contendo pelo menos um numero ou caracter especial (!@#$%^&*()-_=+)';
+
+      var hasSpecial = value.match(/[0-9!@#\$%\^&\*\(\)\-_=\+]+/i);
+//      var hasSpecial = true;
+      var hasLength = (value.length >= 5);
+
+      return (hasSpecial && hasLength);
+   },
+
+   senhaText: 'A senha deve ter pelo menos 5 caracteres, contendo pelo menos um numero ou caracter especial (!@#$%^&*()-_=+)',
+});
+
+
+
+//var formCadUsuario = new Ext.form.FormPanel({
+var formCadUsuario = new Ext.ux.iasoft.MeuForm({
+	id : "formCadUsuarioID"
+	//	url : 'index.php?m=sistema&u=usuario&a=SysUsuario&acao=doCadUsuario2',
+	//	url : 'index.php',
+	,acao:'doCadUsuario3'
+	,success : function() { alert('ok'); }
+	/*	failure : function() { alert('erro'); },*/
+	,items : [
+	{
+		xtype : "textfield",
+		fieldLabel : "Nome",
+		allowBlank : false,
+		blankText : "Favor informar o nome do usuario",
+		name : "nome"
+	},        {
+		xtype : "textfield"
+		,fieldLabel : "Username"
+		,width : 200
+		,blankText : "Favor informar o username"
+		,allowBlank : false
+		,name : "username"
+		,maxLengthText : 32
+		,maxLengthText : "O username pode ter até 32 caracteres"
+		,minLength : 4
+		,minLengthText : "O username deve ter pelo menos 4 caracteres"
+	},        {
+		xtype : "textfield",
+		fieldLabel : "Senha",
+		width : 160,
+		inputType : "password",
+		vtype: 'senha',
+		id : "senha",
+		name : "senha"
+	},        {
+		xtype : "textfield",
+		fieldLabel : "Repita a senha",
+		inputType : "password",
+		width : 160,
+		id : "senha2",
+		name : "senha2",
+		initialPasswordField: 'senha',
+		vtype: 'senha',
+		validator : function() {
+			if (Ext.getCmp('senha').value != Ext.getCmp('senha2').value) {
+				alert('Senhas informadas n&atilde;o s&atilde;o iguais.');
+				return false;
+			} else {
+				return true;
+			}
+		}
+	}],
+	buttons : [
+	{
+		text : 'Gravar',
+		formBind: true,
+		handler:function(){
+
+			formCadUsuario.gravar();
+
+			//			formCadUsuario.getForm().submit({
+			//				method:'POST',
+			//				waitTitle:'Comunicando',
+			//				waitMsg:'Gravando...',
+			//				url : 'index.php?m=sistema&u=usuario&a=SysUsuario&acao=doCadUsuario2',
+			//
+			//				success:function(form, action){
+			//					obj = Ext.util.JSON.decode(action.response.responseText);
+			//
+			//					Ext.Msg.alert('Status', 'Acesso permitido! '+obj.empresa, function(btn, text){
+			//						/*							if (btn == 'ok'){
+			//						var redirect = '../desktop2/desktop.php?cdEmpresa='+obj.empresa;
+			//						window.location = redirect;
+			//						}*/
+			//					});
+			//				},
+			//			});
+
+		}
+	}
+	]
+});
+
+
+
+
+var formListaUsuario = new Ext.ux.iasoft.MeuForm({
+	id : "formListaUsuariosID",
+	items : [    
+	{
+		xtype : "label",
+		text : "Listagem de Usuários",
+		style : 'text-size:14px; color: red'
+	}, { xtype : "label", html:'<hr>' },
+	/*new Ext.ux.RecordFormGrid(),*/
+	{
+		/*xtype : "recordformgrid",*/
+		/*xtype : "recordformgrid"*/
+	}
+	
+	],
+	json : {
+		/*required_js : "lib/gama/extJS/terceiros/recordform/js/Ext.ux.grid.Search.js;./lib/gama/extJS/terceiros/recordform/js/Ext.ux.IconMenu.js;./lib/gama/extJS/terceiros/recordform/js/Ext.ux.grid.RowActions.js;./lib/gama/extJS/terceiros/recordform/js/Ext.ux.grid.RecordForm.js;./lib/gama/extJS/terceiros/recordform/js/Ext.ux.form.DateTime.js;3rdparty/webblocks/Ext.ux.RecordFormGrid.js",*/
+		required_css : "lib/gama/extJS/terceiros/recordform/css/icons.css;./lib/gama/extJS/terceiros/recordform/css/Ext.ux.grid.RowActions.css;./lib/gama/extJS/terceiros/recordform/css/recordform.css"
+	}
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+
+{
+	fieldLabel: 'Password',
+	id: 'password',
+	name: 'password',
+	allowBlank: false,
+	xtype: 'textfield',
+	inputType: 'password',
+	vtype: 'password',
+	width: 200,
+	maxLength: 64
+},
+{
+	fieldLabel: 'Confirm',
+	id: 'passwordConfirm',
+	name: 'passwordConfirm',
+	xtype: 'textfield',
+	inputType: 'password',
+	vtype: 'password',
+	allowBlank: false,
+	width: 200,
+	maxLength: 64,
+	initialPasswordField: 'password'
+}*/
+
+
+
+
+

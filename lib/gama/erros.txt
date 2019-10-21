@@ -1,0 +1,54 @@
+Copyright: IASoft Desenvolvimento de Sistemas
+Criação: 20 - Fevereiro - 2009
+Autor: Eduardo Luz
+Última alteração:
+	$Rev: 451 $
+	$Author: eduluz $
+	$Date: 2009-11-10 11:49:29 -0200 (ter, 10 nov 2009) $
+------------------------------------------------
+
+Este arquivo possui a lista de erros padronizada no Gama3.
+
+90	ERRO_SYS_ACAO_INEXISTENTE
+	Invocada uma ação que não existe, no contexto informado (M, U, A e ACAO).
+
+51	ERRO_INSERT_DESCONHECIDO
+	Algum erro ocorreu na tentativa de excutar a inclusão de um registro no
+	banco de dados. Provavelmente está faltando o valor de algum campo obrigatório,
+	ou o valor está fora do formato esperado pelo banco de dados (como o campo do
+	tipo inteiro vir uma string, ou data e vir um inteiro, por exemplo).
+
+52	ERRO_INSERT_UNIQUE
+	Existe algum índice do tipo unique, restringindo um conjunto de colunas, e o
+	registro que se está tentando incluir viola esta regra. Verifique os índices
+	do tipo unique da tabela em questão.
+
+61	ERRO_UPDATE_DESCONHECIDO
+	Algum erro ocorreu na atualização de um registro no banco de dados.
+	Provavelmente está faltando o valor de algum campo obrigatório,
+	ou o valor está fora do formato esperado pelo banco de dados (como o campo do
+	tipo inteiro vir uma string, ou data e vir um inteiro, por exemplo)
+
+62	ERRO_UPDATE_UNIQUE
+	Existe algum índice do tipo unique, restringindo um conjunto de colunas, e o
+	registro que se está tentando atualizar viola esta regra. Verifique os índices
+	do tipo unique da tabela em questão.
+
+71	ERRO_DELETE_DESCONHECIDO
+	Algum erro ocorreu na exclusão do registro no banco de dados.
+
+72	ERRO_DELETE_REGISTRO_ASSOCIADO
+	Existem restrições à exclusão do registro, em virtude de existirem outros
+	registros vinculados a ele. Veja a lista de dependências existentes da tabela
+	em questão. Para alguns casos, use a exclusão lógica, que consiste na atribuição
+	de um valor a um campo que indique que o registro em questão foi desativado, e
+	não vai aparecer nas listagens como registro válido; Consiste em um UPDATE.
+	Para casos muito especiais e bem controlados, você pode optar por mudar as
+	dependências com os outros objetos, para que sejam excluídos em cascata, mas
+	atenção: USE COM CUIDADO, pois pode fazer um grande estrago - excluindo registros
+	que não deveriam ser excluídos.
+
+81	ERRO_SYS_TABELA_AUDITORIA_INEXISTENTE
+	A tabela de auditoria do sistema não está presente. Verifique a DDL da mesma e
+	crie-a, ou desative o seu uso até que a mesma seja regularmente criada.
+

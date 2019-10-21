@@ -1,0 +1,64 @@
+<?php // $Rev: 11 $ - $Author: eduluz $ $Date: 2008-06-12 11:38:50 -0300 (qui, 12 jun 2008) $
+
+
+/**
+ * Conjunto de usuários, criado de acordo com
+ * as necessidades de cada aplicação.
+ *
+ * @author Eduardo S. da Luz
+ * @package Gama3
+ * @created 2008-06-10
+ * @copyright IASoft Desenvolvimento de Sistemas
+ */
+class SysGrupoUsuariosAR extends BaseAR {
+
+	/**
+	 * Identificador único e auto-incremental.
+	 *
+	 * @var integer
+	 */
+	public $gu_id;
+
+	/**
+	 * Nome do grupo.
+	 *
+	 * @var string
+	 */
+	public $gu_nome;
+
+	/**
+	 * Descrição do grupo em questão.
+	 *
+	 * @var string
+	 */
+	public $gu_descricao;
+
+	/**
+	 * Código do usuário responsável pelo grupo.
+	 *
+	 * @var integer
+	 */
+	public $gu_usuario_admin_id;
+
+	/**
+	 * Indicador da validade do registro.
+	 *
+	 * @var char
+	 */
+	public $gu_status_registro;
+
+	/**
+	 * Construtor da classe SysGrupoUsuariosAR.
+	 *
+	 * @return SysGrupoUsuariosAR
+	 */
+	function SysGrupoUsuariosAR() {
+		$this->init('tb_grupo_usuarios',array('gu_id'));
+	}
+
+
+} // eoc SysGrupoUsuarios
+
+
+
+?>

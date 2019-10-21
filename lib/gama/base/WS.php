@@ -1,0 +1,177 @@
+<?php // $Rev: 84 $ $Author: eduluz $ $Date: 2008-09-01 17:24:09 -0300 (seg, 01 set 2008) $
+
+
+/**
+ * Classe que encapsula as funcionalidades necessárias
+ * para que sejam realizadas chamadas a webservices
+ * disponibilizados dentro da arquitetura Gama.
+ *
+ * Um detalhe importante, é que os dados enviados ao
+ * servidor de webservice serão serializados e depois codificados
+ * usando o padrão BASE64. Lá deverão ser decodificados e
+ * deserializados, para então ser processados. Seu retorno deverá
+ * também ser convertido em um objeto serializado e encapsulado
+ * em um formato BASE64, para depois voltar para o cliente.
+ *
+ * Esse padrão foi necessário para permitir a passagem de objetos
+ * e vetores como parâmetros, uma vez que seria mais complexa a
+ * conversão dos objetos para um padrão XML e depois retornar aos
+ * valores naturais.
+ *
+ * @author Eduardo Schmitt da Luz
+ * @created: 2008-05-29
+ * @copyright IASoft Desenvolvimento de Sistemas LTDA
+ * @package gama3.main.webservice.teste
+ */
+class WSGamaClient {
+
+	/**
+	 * Lista de parâmetros passados para o servidor de
+	 * webservice, padronizados pelo Gama.
+	 *
+	 * @var array
+	 */
+	var $parms = array();
+
+	/**
+	 * Nome do serviço que será invocado.
+	 *
+	 * @var string
+	 */
+	var $nome;
+
+	/**
+	 * Instância da classe nusoap_client, que possui todas as
+	 * funcionalidades necessárias para realizar o processo
+	 * de envio da solicitação de execução de serviço remoto.
+	 *
+	 * @var nusoap_client
+	 */
+	var $client = null;
+
+
+	/**
+	 * Construtor da classe
+	 *
+	 * @param string $url localização do script que atenderá o serviço
+	 * @param boolean $wsdl indica se está sendo informada na URL o parâmetro WSDL
+	 * @return WSGamaClient
+	 */
+	function WSGamaClient($url="http://localhost/dev/infodigi/ws.php?wsdl",$wsdl=true) {
+		$this->setClient($url,$wsdl);
+		$err = $this->client->getError();
+		if ($err){
+			throw new SysException($err,81);
+		}
+
+		$this->setGamaParms();
+	}
+
+	/**
+	 * Define o valor do objeto 'client'
+	 *
+	 * @param string $url localização do script que atenderá o serviço
+	 * @param boolean $wsdl indica se está sendo informada na URL o parâmetro WSDL
+	 */
+	function setClient($url,$wsdl) {
+		$this->client = new nusoap_client($url,$wsdl);
+	}
+
+	/**
+	 * Recupera a referência ao objeto nusoap_client
+	 *
+	 * @return nusoap_client
+	 */
+	function getClient() {
+		return $this->client;
+	}
+
+
+	/**
+	 * Define os valores dos atributos necessários para se efetivar
+	 * uma comunicação com um componente remoto do Gama.
+	 *
+	 * @param string $m Nome do módulo
+	 * @param string $u Nome do submódulo
+	 * @param string $a Nome do script action
+	 * @param string $acao Nome do método que será invocado
+	 */
+	function setGamaParms($m=null,$u=null,$a=null,$acao=null) {
+		$this->parms['m'] = $m;
+		$this->parms['u'] = $u;
+		$this->parms['a'] = $a;
+		$this->parms['acao'] = $acao;
+	}
+
+	/**
+	 * Define os valores dos atributos de autenticação.
+	 *
+	 * @param string $user
+	 * @param string $pass
+	 */
+	function setAuthParms($user,$pass) {
+		$this->parms['cd_login_usuario'] = $user;
+		$this->parms['cd_senha_usuario'] = $pass;
+	}
+
+	/**
+	 * Recupera o conteúdo dos parâmetros de configuração
+	 * previamente definidas, além de permitir a inclusão
+	 * de um vetor de parâmetros adicionais.
+	 *
+	 * @param array $append
+	 * @return array
+	 */
+	function getGamaParms($append=array()) {
+/*		echo '(((';
+		print_r($this->parms);
+		print_r($append);
+		echo ')))';*/
+		return array_merge($this->parms,$append);
+	}
+
+	/**
+	 * Define o nome do serviço que será invocado.
+	 *
+	 * @param string $nome
+	 */
+	function setNome($nome) {
+		$this->nome = $nome;
+	}
+
+	/**
+	 * Retorna o nome do serviço invocado.
+	 *
+	 * @return string
+	 */
+	function getNome() {
+		return $this->nome;
+	}
+
+	/**
+	 * Realiza a chamada do serviço remoto.
+	 *
+	 * @param array $parms Parâmetros que serão enviados para o serviço
+	 * @return mixed
+	 */
+	function executa($parms) {
+		$parametros = Gama3Utils::serializa($parms);
+		$resultado = $this->client->call ($this->getNome(),$this->getGamaParms(array('parametros'=>$parametros)));
+
+
+		if ($this->client->fault){
+			throw new SysException($result,82);
+		}else{
+			$err = $this->client->getError();
+			if ($err){
+				print_r($this->client);
+				throw new SysException($err,83);
+			}//end_if
+		}//end_else
+		return Gama3Utils::deserializa($resultado);
+	}
+
+}
+
+
+?>

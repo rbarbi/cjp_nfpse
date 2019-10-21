@@ -1,0 +1,139 @@
+
+
+/*
+Construtor...
+*/
+Ext.onReady(function(){
+
+	// Inicializa a opção dos alertas nos campos
+	Ext.QuickTips.init();
+
+	Ext.form.Field.prototype.msgTarget = "side"; // Aqui defino que os alertas devem aparecer ao lado dos campos
+
+
+
+	// Campo de username do login. É Obrigatório.
+	var cpLoginUsername = new Ext.form.TextField({
+		fieldLabel:'Username',
+		name:'username',
+		allowBlank:false,
+		blankText: 'Favor preencher com seu username'
+	}
+	);
+
+	// Campo de senha do login. É Obrigatório.
+	var cpLoginSenha = new Ext.form.TextField ({
+		fieldLabel:'Senha',
+		name:'senha',
+		allowBlank:false,
+		inputType:'password',
+		blankText: 'A senha &eacute; obrigat&oacute;ria'
+	});
+
+
+
+
+
+	// Create a variable to hold our EXT Form Panel.
+	// Assign various config options as seen.
+	var login = new Ext.FormPanel({
+		labelWidth:80,
+		url:'index.php',
+		timeout:5000,
+		frame:true,
+		title:'<img src="./lib/gama/extJS/iasoft/img/key2.png" width="24" height="15" align="absmiddle">&nbsp;&nbsp;&nbsp;Controle de Acesso',
+		defaultType:'textfield',
+		monitorValid:true,
+		// Specific attributes for the text fields for username / password.
+		// The "name" attribute defines the name of variables sent to the server.
+		items:[
+		cpLoginUsername,
+		cpLoginSenha,
+/*		{xtype:'hidden',name:'clsb3DoRedirect',value:1},*/
+		{xtype:'hidden',name:'acao',value:'doLogin'}
+		],
+
+		// All the magic happens after the user clicks the button
+		buttons:[{
+			text:'Login',
+			formBind: true,			
+			// Function that fires when user clicks the button
+			handler:function(){
+				login.getForm().submit({
+					method:'POST',
+					waitTitle:'Autenticando',
+					waitMsg:'Efetuando login no sistema...',
+					timeout:10000,
+
+					// Functions that fire (success or failure) when the server responds.
+					// The one that executes is determined by the
+					// response that comes from login.asp as seen below. The server would
+					// actually respond with valid JSON,
+					// something like: response.write "{ success: true}" or
+					// response.write "{ success: false, errors: { reason: 'Login failed. Try again.' }}"
+					// depending on the logic contained within your server script.
+					// If a success occurs, the user is notified with an alert messagebox,
+					// and when they click "OK", they are redirected to whatever page
+					// you define as redirect.
+
+					success:function(form, action){
+						obj = Ext.util.JSON.decode(action.response.responseText);
+
+//						Ext.Msg.alert('Status', 'Acesso permitido!', function(btn, text){
+//							if (btn == 'ok'){
+								var redirect = 'index.php';
+								window.location = redirect;
+//							}
+//						});
+					},
+
+					// Failure function, see comment above re: success and failure.
+					// You can see here, if login fails, it throws a messagebox
+					// at the user telling him / her as much.
+
+					failure:function(form, action){
+						if(action.failureType == 'CONNECT_FAILURE'){
+							titulo = 'Timeout!';
+							msg = 'Timeout!';
+						} else if(action.failureType == 'server'){
+							obj = Ext.util.JSON.decode(action.response.responseText);
+							titulo = 'Login falhou!';
+							msg = obj.errors.reason;
+						} else {
+							titulo = 'Warning!';
+							msg = 'Authentication server is unreachable : ' + action.response.responseText;
+						}
+
+						Ext.Msg.show({
+							title:titulo,
+							msg: msg,
+							buttons: Ext.Msg.OK,
+							fn: function(){login.inicializar();},
+							animEl: 'elId',
+							icon: Ext.MessageBox.WARNING
+						});
+					}
+				});
+			}
+		}],
+		inicializar:function() {
+			//login.getForm().reset();
+			cpLoginUsername.focus();
+		}
+	});
+
+
+	// This just creates a window to wrap the login form.
+	// The login object is passed to the items collection.
+	var win = new Ext.Window({
+		layout:'fit',
+		width:275,
+		height:150,
+		closable: false,
+		resizable: false,
+		plain: true,
+		border: false,
+		items: [login]
+	});
+	win.show();
+});

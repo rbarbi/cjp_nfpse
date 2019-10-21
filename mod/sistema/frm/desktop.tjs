@@ -1,0 +1,175 @@
+
+Ext.QuickTips.init();
+Ext.form.Field.prototype.msgTarget = "side";
+
+
+
+MyDesktop.SistemaGama3Window = function(config) {
+	Ext.apply(this,{
+	});
+	MyDesktop.SistemaGama3Window.superclass.constructor.apply(this,arguments);
+};
+
+
+MyDesktop.SistemaGama3Window = Ext.extend(Ext.app.Module, {
+	id:'g3sistema-win',
+	init : function(){
+		this.launcher = {
+			text: 'Sistema',
+			iconCls:'icn-gama3',
+			handler : this.createWindow,
+			scope: this
+		}
+	},
+
+	createWindow : function(){
+		/*
+		var menuCadastro = new Ext.menu.Menu({
+		text:'meu Menu',
+		items: [{
+		text: 'Veiculos',
+		menu: [{
+		text: 'Fabricante',
+		handler: doShowFormCadFabricante
+		}, {
+		text: 'Modelo',
+		handler: clickHandler
+		}
+		]
+		},
+		new Ext.menu.Item({
+		text: 'Tanques de Caminh&otilde;es',
+		handler: clickHandler,
+		menu:[{
+		text: 'Fabricante',
+		handler: clickHandler
+		},{
+		text: 'Modelo',
+		handler: clickHandler
+		}]
+		}),
+		'-',
+		new Ext.menu.CheckItem({
+		text: 'A check item',
+		checkHandler: checkHandler
+		}),
+		new Ext.menu.CheckItem({
+		text: 'Another check item',
+		checkHandler: checkHandler
+		})
+		]
+		});
+		*/
+
+
+
+		var desktop = this.app.getDesktop();
+		var win = desktop.getWindow('g3sistema-win');
+		if(!win){
+			win = desktop.createWindow({
+				width:900,
+				items: [painelPrincipal]
+			},Ext.ux.iasoft.MinhaJanela);
+		}
+
+		win.show();
+
+
+		win.addBotaoLogotipo();
+
+		// Sobrescrevendo o tratamento do botão de mensagem
+		win.stbAlerta.un('click',win.hndClickBtnAlerta);
+		win.stbAlerta.on('click',
+		function(btn) {
+			win.stbAlerta.setText('');
+			win.getBottomToolbar().setText('');
+			win.stbAlerta.hide();
+		}
+		);
+
+
+
+	}
+});
+
+
+
+function clickHandler() {
+	//		window.stbAlerta.setText('aa');
+	alert('Clicked on a menu item');
+}
+
+function doShowFormCadFabricante() {
+	alert('Abrindo o formulario');
+}
+
+function checkHandler() {
+	alert('Checked a menu item');
+}
+
+
+
+
+
+var painelFormularios = new Ext.Panel({
+	id : "painelFormID",
+	layout : 'card',
+	region : "center",
+	title : "Formularios do Sistema",
+
+	activeItem: 0,
+
+	items : [formCadUsuario, formListaUsuario, formCadGrupo]
+});
+
+
+
+var painelPrincipal = new Ext.Panel({
+	id : 'painelPrincipal',
+	layout : "border",
+	alterna : function(id,indice) {
+		var c = Ext.getCmp('painelFormID');
+		var f = Ext.getCmp(id);
+		c.getLayout().setActiveItem(indice);
+		c.doLayout();
+	},
+	items : [
+	painelFormularios,
+	{
+		itemId : 'painelMenu',
+		region : "west",
+		title : "Menu",
+		width : 200,
+		split : true,
+		items : [        {
+			layout : "accordion",
+			layoutConfig : {
+				activeOnTop : false,
+				animate : true,
+				autoWidth : true,
+				collapseFirst : true,
+				fill : true,
+				hideCollapseTool : false,
+				titleCollapse : true
+			},
+			items : [
+			menuUsuario,
+			menuGrupoUsuario,
+			/*{
+				title : "Grupo de Usuario",
+				autoHeight : true,
+				html : "Incluir Grupo <br> Listar Grupos existentes"
+			},*/
+			{
+				autoHeight : false,
+				title : "Transacao"
+			},            {
+				autoHeight : false,
+				title : "Permissao"
+			}]
+		}]
+	}]
+});
+
+
+

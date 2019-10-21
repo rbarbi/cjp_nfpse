@@ -1,0 +1,20 @@
+
+#g3sistema-win-shortcut img {
+    width:48px;
+    height:48px;
+    background-image: url(../img/icons/48_my_computer.png) !important;    
+    filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../img/icons/48_my_computer.png', sizingMethod='scale')!important;    
+}
+
+
+
+.icn-gama3 {
+    background-image:url(../img/icons/caminhao1-16x16.png) !important;
+}
+
+
+.botao {
+	width : 100%;
+	border : solid 3px red
+}
+

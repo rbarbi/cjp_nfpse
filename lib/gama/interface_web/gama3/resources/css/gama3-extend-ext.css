@@ -1,0 +1,208 @@
+
+/* Ã?cones painÃ©is */
+
+
+root {
+    display: block;
+}
+
+.x-btn-text-icon-k {
+    background-color: green;
+    color: white;
+    padding: 3px 0 2px 18px;
+}
+
+.gama3-margin-5-all {
+    margin: 5px;
+}
+
+/* ---- Trigger's ---- */
+
+.x-form-field-wrap .x-form-add-trigger{
+    background-image: url(../img/trigger/add.png);
+    cursor:pointer;
+}
+
+.x-form-field-wrap .x-form-tree-trigger{
+    background-image: url(../img/trigger/tree.png);
+    cursor:pointer;
+}
+
+/* Ã?cones painÃ©is */
+
+.gama3-panel-icon-add {
+    background: url(../img/icones/add.png) 0 3px no-repeat !important;
+}
+
+.gama3-panel-icon-view {
+    background: url(../img/icones/visualizar.png) 0 3px no-repeat !important;
+}
+
+.gama3-panel-icon-edit {
+    background: url(../img/icones/editar.png) 0 3px no-repeat !important;
+}
+
+.gama3-panel-icon-list {
+    background: url(../img/icones/tabs.png) 0 3px no-repeat !important;
+}
+
+/* Escurece cor do node selecionado */
+.x-tree-node .x-tree-selected {
+    background-color: #BFDBFF;
+}
+
+/*!
+ * Ext JS Library 3.0.0 -> gama3.Message
+ * Copyright(c) 2006-2009 Ext JS, LLC
+ * licensing@extjs.com
+ * http://www.extjs.com/license
+ */
+
+.msg .x-box-mc {
+    font-size:14px;
+}
+#msg-div {
+    position:absolute;
+    left:35%;
+    top:10px;
+    width:250px;
+    z-index:20000;
+}
+
+/* ---- Tree ---- */
+
+.icon-expand-all {
+    background-image:url(../img/tree/expand-all.gif) !important;
+}
+
+.icon-collapse-all {
+    background-image:url(../img/tree/collapse-all.gif) !important;
+}
+
+/* ---- Icons ---- */
+
+.gama3-icon-save {
+    background: url(../img/icones/apply.png) no-repeat !important;
+}
+
+.gama3-icon-cancel{
+    background: url(../img/icones/cancel.png) no-repeat !important;
+}
+
+.gama3-icon-clear{
+    background: url(../img/icones/clear.png) no-repeat !important;
+}
+
+.gama3-icon-view {
+    background: url(../img/icones/visualizar.png) no-repeat !important;
+}
+
+.gama3-icon-add {
+    background: url(../img/icones/add.png) no-repeat !important;
+}
+
+.gama3-icon-edit{
+    background: url(../img/icones/editar.png) no-repeat !important;
+}
+
+.gama3-icon-remove{
+    background: url(../img/icones/remove.png) no-repeat !important;
+}
+
+.gama3-icon-list {
+    background: url(../img/icones/tabs.png) no-repeat !important;
+}
+
+.gama3-icon-box {
+    background: url(../img/box.png) no-repeat !important;
+}
+
+.gama3-icon-filtrar {
+	background:transparent url(../img/iconesfiltrar.png) no-repeat scroll 0 2px !important;
+}
+
+.gama3-icon-limpar {
+	background:transparent url(../img/icones/limpar.png) no-repeat scroll 0 2px !important;
+}
+
+.gama3-icon-imprimir {
+	background:transparent url(../img/icones/imprimir.png) no-repeat scroll 0 2px !important;
+}
+
+
+/* ---- Form ---- */
+
+/* -- TreeTriggerField -- */
+
+.gama3-tree-icon-save {
+    background: url(../img/icones/apply.png) 0 2px no-repeat !important;
+}
+
+.gama3-tree-icon-cancel{
+    background: url(../img/icones/cancel.png) 0 2px no-repeat !important;
+}
+
+.gama3-tree-icon-clear{
+    background: url(../img/icones/excluir.png) 0 2px no-repeat !important;
+}
+
+/* ---- LIST ---- */
+
+/* -- ListLockup -- */
+
+.gama3-list-lockup .x-grid3-row {
+    cursor: pointer;
+}
+
+/* ---- MESSAGE BOX ---- */
+
+.gama3-mb-success {
+    background:transparent url(../img/success.png) no-repeat scroll left top;
+}
+
+/* PluginHelpField */
+.gama3-form-icon-tip {
+    background: transparent url(../img/tip.png) no-repeat scroll 0 2px;
+    height:18px;
+    width: 16px;
+    margin-left:2px;
+    position:absolute;
+}
+
+.gama3-form-icon-tip-margin {
+   margin-left:20px;
+}
+/* FIM - PluginHelpField */
+
+/* SELECTOUTROS */
+.gama3-tip-field .x-tip-header {
+    background:transparent url(../img/left.png) no-repeat scroll left top;
+    height: 16;
+    padding-left: 28px;
+    padding-top: 2px;
+}
+
+.gama3-form-select_outros-text_field {
+    margin-left: 20px;
+    left: 20px;
+}
+
+/**---------------------------------------------------------------
+*** IE8 override fixes  - http://www.extjs.com/forum/showthread.php?t=75542
+***---------------------------------------------------------------*/
+.x-form-text, .ext-ie .x-form-text, .ext-ie .x-form-file {
+    height:22px;
+    line-height:18px;
+    margin: 0px 0px;
+    vertical-align:middle;
+}
+
+.ext-ie6 .x-form-text, .ext-ie7 .x-form-text {
+    margin:-1px 0; /* ie bogus margin bug */
+    height:22px; /* ie quirks */
+    line-height:18px;
+}
+
+.ext-ie6 textarea.x-form-field, .ext-ie7 textarea.x-form-field {
+    margin:-1px 0; /* ie bogus margin bug */
+}

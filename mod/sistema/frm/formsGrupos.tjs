@@ -1,0 +1,18 @@
+
+
+var formCadGrupo = new Ext.ux.iasoft.MeuForm({
+	id : "formCadGrupoID",	
+	items : [{
+		xtype : "textfield",
+		fieldLabel : "Nome",
+		allowBlank : false,
+		blankText : "Favor informar o nome do grupo",
+		name : "nome"
+	}],
+	buttons : [
+	{
+		text : 'Gravar',
+		handler : function() {formCadGrupo.gravar();}
+	}
+	]
+});

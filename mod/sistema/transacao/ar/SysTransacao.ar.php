@@ -1,0 +1,308 @@
+<?php // $Rev: 273 $ - $Author: eduluz $ $Date: 2008-12-05 17:22:10 -0200 (Fri, 05 Dec 2008) $
+
+
+/**
+ * Serviço disponível no sistema, que corresponde
+ * a um formulário ou funcionalidade (ação), que
+ * pode estar em um item de menu.
+ *
+ * @author Eduardo S. da Luz
+ * @package Gama3
+ * @created 2008-06-10
+ * @copyright IASoft Desenvolvimento de Sistemas
+ */
+class SysTransacaoAR extends BaseAR {
+
+	/**
+	 * Identificador único do objeto - auto-incremental.
+	 *
+	 * @var integer
+	 */
+	public $tr_id;
+
+	/**
+	 * Nome simbólico da transação. Usada para label
+	 * de menus.
+	 *
+	 * @var string
+	 */
+	public $tr_nome;
+
+
+	/**
+	 * Descrição simplificada, usada para tooltips.
+	 *
+	 * @var string
+	 */
+	public $tr_descricao;
+
+	/**
+	 * Módulo onde se encontra a transação.
+	 *
+	 * @var string
+	 */
+	public $tr_m;
+
+	/**
+	 * Submódulo da transação.
+	 *
+	 * @var string
+	 */
+	public $tr_u;
+
+	/**
+	 * Action que responde pela transação.
+	 *
+	 * @var string
+	 */
+	public $tr_a;
+
+	/**
+	 * Identificador do nome do serviço solicitado,
+	 * mapeado dentro do Action correspondente.
+	 *
+	 * @var string
+	 */
+	public $tr_acao;
+
+	/**
+	 * Menor nível necessário para se permitir a
+	 * execução da transação.
+	 *
+	 * @var integer
+	 */
+	public $tr_nivel_min_usuario;
+
+
+	/**
+	 * Caracter que indica o comportamento padrão do
+	 * acesso a esta transação: '+' = normalmente
+	 * aberto; '-' = normalmente fechado;
+	 *
+	 * Quando associar um usuário a uma transação,
+	 * sem informar o tipo de permissão (aberta ou
+	 * fechada) , prevalece a da transação.
+	 *
+	 * @var char
+	 */
+	public $tr_permissao_default;
+
+
+	/**
+	 * Indicador de validade do registro.
+	 *
+	 * @var char
+	 */
+	public $tr_status;
+
+
+
+	 /**
+	  * @var int tr_tr_agregadora
+	  */
+	 public $tr_tr_agregadora;
+
+
+
+
+//--------------------------------------------
+
+	/**
+	 * Construtor da classe SysTransacaoAR.
+	 *
+	 * @return SysTransacaoAR
+	 */
+	function SysTransacaoAR($idConn=false) {
+		$this->init('tb_sys_transacao',array('tr_id'),$idConn);
+	} // eof SysTransacaoAR
+
+//--------------------------------------------
+
+
+	/**
+	 * Retorna o valor de tr_id
+	 * @return mixed
+	 */
+	public function getID () {
+		return $this->tr_id;
+	} // eof getID
+
+	/**
+	 * Retorna o valor de tr_nome
+	 * @return mixed
+	 */
+	public function getNome () {
+		return $this->tr_nome;
+	} // eof getNome
+
+	/**
+	 * Retorna o valor de tr_descricao
+	 * @return mixed
+	 */
+	public function getDescricao () {
+		return $this->tr_descricao;
+	} // eof getDescricao
+
+	/**
+	 * Retorna o valor de tr_m
+	 * @return mixed
+	 */
+	public function getM () {
+		return $this->tr_m;
+	} // eof getM
+
+	/**
+	 * Retorna o valor de tr_u
+	 * @return mixed
+	 */
+	public function getU () {
+		return $this->tr_u;
+	} // eof getU
+
+	/**
+	 * Retorna o valor de tr_a
+	 * @return mixed
+	 */
+	public function getA () {
+		return $this->tr_a;
+	} // eof getA
+
+	/**
+	 * Retorna o valor de tr_acao
+	 * @return mixed
+	 */
+	public function getAcao () {
+		return $this->tr_acao;
+	} // eof getAcao
+
+	/**
+	 * Retorna o valor de tr_nivel_min_usuario
+	 * @return mixed
+	 */
+	public function getNivelMinimo () {
+		return $this->tr_nivel_min_usuario;
+	} // eof getNivelMinimo
+
+	/**
+	 * Retorna o valor de tr_permissao_default
+	 * @return mixed
+	 */
+	public function getPermissaoDefault () {
+		return $this->tr_permissao_default;
+	} // eof getPermissaoDefault
+
+	/**
+	 * Retorna o valor de tr_status
+	 * @return mixed
+	 */
+	public function getStatus () {
+		return $this->tr_status;
+	} // eof getStatus
+
+
+
+	/**
+	 * Retorna o valor de tr_tr_agregadora
+	 * @return mixed
+	 */
+	public function getTransacaoAgregadora () {
+		return $this->tr_tr_agregadora;
+	} // eof getTransacaoAgregadora
+
+//--------------------------------------------
+
+	/**
+	 * Define o valor de tr_id
+	 * @param mixed $tr_id
+	 */
+	public function setID ($tr_id) {
+		$this->tr_id = $tr_id;
+	} // eof setID
+
+	/**
+	 * Define o valor de tr_nome
+	 * @param mixed $tr_nome
+	 */
+	public function setNome ($tr_nome) {
+		$this->tr_nome = $tr_nome;
+	} // eof setNome
+
+	/**
+	 * Define o valor de tr_descricao
+	 * @param mixed $tr_descricao
+	 */
+	public function setDescricao ($tr_descricao) {
+		$this->tr_descricao = $tr_descricao;
+	} // eof setDescricao
+
+	/**
+	 * Define o valor de tr_m
+	 * @param mixed $tr_m
+	 */
+	public function setM ($tr_m) {
+		$this->tr_m = $tr_m;
+	} // eof setM
+
+	/**
+	 * Define o valor de tr_u
+	 * @param mixed $tr_u
+	 */
+	public function setU ($tr_u) {
+		$this->tr_u = $tr_u;
+	} // eof setU
+
+	/**
+	 * Define o valor de tr_a
+	 * @param mixed $tr_a
+	 */
+	public function setA ($tr_a) {
+		$this->tr_a = $tr_a;
+	} // eof setA
+
+	/**
+	 * Define o valor de tr_acao
+	 * @param mixed $tr_acao
+	 */
+	public function setAcao ($tr_acao) {
+		$this->tr_acao = $tr_acao;
+	} // eof setAcao
+
+	/**
+	 * Define o valor de tr_nivel_min_usuario
+	 * @param mixed $tr_nivel_min_usuario
+	 */
+	public function setNivelMinimo ($tr_nivel_min_usuario) {
+		$this->tr_nivel_min_usuario = $tr_nivel_min_usuario;
+	} // eof setNivelMinimo
+
+	/**
+	 * Define o valor de tr_permissao_default
+	 * @param mixed $tr_permissao_default
+	 */
+	public function setPermissaoDefault ($tr_permissao_default) {
+		$this->tr_permissao_default = $tr_permissao_default;
+	} // eof setPermissaoDefault
+
+	/**
+	 * Define o valor de tr_status
+	 * @param mixed $tr_status
+	 */
+	public function setStatus ($tr_status) {
+		$this->tr_status = $tr_status;
+	} // eof setStatus
+
+
+	/**
+	 * Define o valor de tr_tr_agregadora
+	 * @param mixed $tr_tr_agregadora
+	 */
+	public function setTransacaoAgregadora ($tr_tr_agregadora) {
+		$this->tr_tr_agregadora = $tr_tr_agregadora;
+	} // eof setTransacaoAgregadora
+
+
+
+} // eoc SysTransacaoAR
+
+
+?>

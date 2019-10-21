@@ -1,0 +1,36 @@
+<xmlProcessamentoNfpse>
+	<identificacaoTomador></identificacaoTomador>
+	<razaoSocialTomador></razaoSocialTomador>
+	<telefoneTomador></telefoneTomador>
+	<emailTomador></emailTomador>
+	<inscricaoMunicipalTomador></inscricaoMunicipalTomador>
+	<codigoMunicipioTomador></codigoMunicipioTomador>
+	<codigoPostalTomador></codigoPostalTomador>
+	<logradouroTomador></logradouroTomador>
+	<numeroEnderecoTomador></numeroEnderecoTomador>
+	<complementoEnderecoTomador></complementoEnderecoTomador>
+	<bairroTomador></bairroTomador>
+	<ufTomador></ufTomador>
+	<paisTomador></paisTomador>
+	<baseCalculo></baseCalculo>
+	<baseCalculoSubstituicao></baseCalculoSubstituicao>
+	<cfps></cfps>
+	<dadosAdicionais></dadosAdicionais>
+	<dataEmissao></dataEmissao>
+	<numeroAEDF></numeroAEDF>
+	<valorISSQN></valorISSQN>
+	<valorISSQNSubstituicao></valorISSQNSubstituicao>
+	<valorTotalServicos></valorTotalServicos>
+	<itensServico>
+		<itemServico>
+			<aliquota></aliquota>
+			<cst></cst>
+			<descricaoServico></descricaoServico>
+			<idCNAE></idCNAE>
+			<quantidade></quantidade>
+			<baseCalculo></baseCalculo>
+			<valorTotal></valorTotal>
+			<valorUnitario></valorUnitario>
+		</itemServico>
+	</itensServico>
+</xmlProcessamentoNfpse>

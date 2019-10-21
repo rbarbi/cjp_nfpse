@@ -1,0 +1,27 @@
+<?php // $Rev: 11 $ - $Author: eduluz $ $Date: 2008-06-12 11:38:50 -0300 (qui, 12 jun 2008) $
+
+/**
+ * Classe que gerencia as atividades de controle de inclusão,
+ * alteração, desativação/reativação de usuários, grupos e
+ * transações.
+ *
+ * Aqui também estarão agrupados os procedimentos de determinação
+ * do nível de acesso bem como as permissões de um usuário em
+ * particular.
+ *
+ * @author Eduardo S. da Luz
+ * @package Gama3
+ * @created 2008-06-10
+ * @copyright IASoft Desenvolvimento de Sistemas
+ *
+ */
+class SysControleAcessoBO {
+
+
+
+
+} // eoc SysControleAcesso
+
+
+
+?>

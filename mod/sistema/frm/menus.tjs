@@ -1,0 +1,86 @@
+
+
+var menuUsuario = new Ext.ux.iasoft.MeuMenu({
+	title: 'Cadastro de Usuario',
+	root : {
+		children: [
+		{
+			id: 'itemMenuCadastraUsuario',
+			text: 'Cadastrar Usuario',
+			qtip : 'Abre o formulario para cadastro de usuarios',
+			icon: './mod/sistema/img/icons/add_usuario.png',
+			valor : 'formCadUsuarioID',
+			indice : 0,
+			leaf: true,
+			draggable : false
+		},{
+			id: 'itemMenuListarUsuarios',
+			text: 'Listar Usuarios',
+			qtip : 'Abre a lista de usuarios',
+			icon: './mod/sistema/img/icons/lista_usuario.png',
+			valor : 'formListaUsuariosID',
+			indice : 1,
+			leaf: true,
+			draggable : false
+		}
+		]
+	}
+});
+
+
+
+
+
+
+menuUsuario.on('click',function(item,e) {
+	//	alert(item.attributes.valor);
+	painelPrincipal.alterna(item.attributes.valor,item.attributes.indice);
+});
+
+
+
+
+
+
+var menuGrupoUsuario = new Ext.ux.iasoft.MeuMenu({
+	title: 'Cadastro de Grupo',	
+	root : {
+		children: [
+		{
+			id: 'itemMenuCadastraGrupo',
+			text: 'Cadastrar Grupo',
+			qtip : 'Abre o formulario para cadastro de grupo',
+			icon: './mod/sistema/img/icons/add_grupo.png',
+			valor : 'formCadGrupoID',
+			indice : 2,
+			leaf: true,
+			draggable : false
+		},{
+			id: 'itemMenuListarGrupos',
+			text: 'Listar Grupos de usuarios',
+			qtip : 'Abre a lista de grupos',
+			icon: './mod/sistema/img/icons/lista_grupo.png',
+			valor : 'formListaGruposID',
+			indice : 3,
+			leaf: true,
+			draggable : false
+		}
+		]
+	}
+});
+
+
+
+menuUsuario.on('click',function(item,e) {
+	painelPrincipal.alterna(item.attributes.valor,item.attributes.indice);
+});
+
+
+menuGrupoUsuario.on('click',function(item,e) {
+	painelPrincipal.alterna(item.attributes.valor,item.attributes.indice);
+});
+
+
+
+
+
