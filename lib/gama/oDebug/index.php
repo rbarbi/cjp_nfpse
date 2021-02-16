@@ -21,7 +21,7 @@ class oDB{															//sample simple class DB
 $aOptions=array(
 	'render_type'          => 'HTML',             					// Renderer type : 'HTML' or 'brut'
 	'restrict_access'      => true,               					// Restrict or not the access : boolean
-	'allowed_ip'           => array('127.0.0.1','192.168.1.23'),	// Authorized IP to view the debug when restrict_access is true
+	'allowed_ip'           => array('127.0.0.1','192.168.40.2'),	// Authorized IP to view the debug when restrict_access is true
 	'allow_url_access'     => true,               					// Allow to access the debug with a special parameter in the url
 	'url_key'              => 'j_aime_la_choucroute',        		// Key for url instant access
 	'url_pass'             => 'avec_une_bonne_biere',          		// Password for url instant access

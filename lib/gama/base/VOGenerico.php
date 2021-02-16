@@ -228,20 +228,18 @@ class VOGenerico {
 		}
 		return $r;
 	}// getNomeCampo
-        
-        public function toArray() {
-            $array = (array) $this;
-            array_walk_recursive($array, function (&$property) {
-                if ($property instanceof Mf_Data) {
-                    $property = $property->toArray();
-                }
-            });
-            $array2 = array();
-            foreach($array as $campo => $valor){
-                $campo2 = str_replace("lsAtributos","",$campo);
-                $array2[$campo2] = $valor;
-            }
-            return $array2;
-        }
 
 } // eoc VOGenerico
+
+
+/*
+$s = "tb_xpto.nome_campo AS cp_nome"; // vale o cp_nome
+//$s = "nome_campo AS xpto";
+//$s = "nome_campo";
+//$s = "tabela.nome_campo";
+
+
+echo getNomeCampo($s);
+*/
+
+?>

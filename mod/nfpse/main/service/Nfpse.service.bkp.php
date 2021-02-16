@@ -42,7 +42,8 @@ class NfpseService extends NfpseBaseService {
 			/*
 			 * ANTES de enviar os dados para a geração do XML, faz a consulta das retenções caso for necessário
 			 */
-			$strDadosAdicionais = $dadosPost['dadosNota']['dadosAdicionais'];
+			//$strDadosAdicionais = $dadosPost['dadosNota']['dadosAdicionais'];
+			$strDadosAdicionais = "";
 
 			// 1 - Para INFODIGI: todas as retenções do regime tributário MAIS retenção do ISS
 			if (strpos($strDadosAdicionais, '[CONSULTAR_TODAS_RETENCOES]') !== false) {

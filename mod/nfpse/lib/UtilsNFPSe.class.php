@@ -108,9 +108,9 @@ class UtilsNFPSe
              * 	9210|No Município, em bens de terceiros por conta de Tomador ou Destinatário estabelecido ou domiciliado em outro estado da federação
              * 	9211|No Município, em bens de terceiros por conta de Tomador ou Destinatário estabelecido ou domiciliado no exterior
              */
-            if (!empty($dados["cfps"])) {
-                $xmlModelo->cfps = $dados["cfps"];
-            } else {
+            /*if (!empty($dados["cfps"])) {
+                $xmlModelo->cfps =9201;
+            } else {*/
                 // Se a cidade do tomador for FLORIANOPOLIS (4205407 codigo ibge)
                 if ($dados["cod_ibge"] == "4205407") {
                     $xmlModelo->cfps = "9201";
@@ -123,7 +123,7 @@ class UtilsNFPSe
                 else {
                     $xmlModelo->cfps = "9203";
                 }
-            }
+            //}
 
             // Dados adicionais da nota fiscal, informação já definida e utulizada na geração de XML anterior
             if ($dados['tipo_nota'] == 'POL') {
