@@ -282,7 +282,7 @@ class MainGama {
 	public function getListaClassesAutoLoad ($chave=null) {
 		if (is_null($chave)) {
 			return $this->listaClassesAutoLoad;
-		} else if (array_key_exists($chave,$this->listaClassesAutoLoad)) {
+		} else if (is_array($this->listaClassesAutoLoad) && array_key_exists($chave,$this->listaClassesAutoLoad)) {
 			return $this->listaClassesAutoLoad[$chave];
 		} else {
 			return false;
@@ -555,7 +555,7 @@ class MainGama {
 	 * @param string $rootPath
 	 * @return MainGama
 	 */
-	function MainGama($rootPath='.',$modPath='mod') {
+	function __construct($rootPath='.',$modPath='mod') {
 		$this->initFase1($rootPath,$modPath);
 
 		//register_shutdown_function("gravaTrace2");

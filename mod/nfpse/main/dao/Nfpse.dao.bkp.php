@@ -155,13 +155,6 @@ class NfpseDAO {
 		$dominio = filter_input(INPUT_SERVER, 'HTTP_HOST', FILTER_SANITIZE_STRING);
 		$ambienteAcessar =  'producao';
 
-		// Tarefa #52555 - Alteração paliativa para caso o endereço de acesso ao microserviço for os IPs abaixo, definir como produção
-		if (
-			strpos($dominio, '192.168.20.158') !== false
-		//|| strpos($dominio, '192.168.20.73') !== false
-		) {
-			$ambienteAcessar = 'producao';
-		}
 
 		$this->_urlWebservice = MainGama::getApp()->getConfig('url'.ucfirst($ambienteAcessar));
 
@@ -209,8 +202,8 @@ class NfpseDAO {
 					'grant_type' => 'client_credentials'
 				);
 
-				$this->_clientId = 'consulta2-nfpse-client';
-				$this->_clientSecret = '7077dbc51dec13a289ece2177cc6efa8';
+				$this->_clientId = 'consulta-nfpse-client';
+				$this->_clientSecret = '2ca53c015bef55767f7064d1c5159d45';
 			}
 
 			// Base64 do client_id:client_secret para o HEADER
@@ -556,8 +549,8 @@ class NfpseDAO {
 			'lrn_info_response' => json_encode($infoRequisicao),
 		];
 
-		$this->getCon()->AutoExecute('log.log_requisicao_nfpse', $arrInserir);
-*/
+		//$this->getCon()->AutoExecute('log.log_requisicao_nfpse', $arrInserir);
+                */
 		//pre($resultado, 'resultado na dao do microservico', false);
 		//pre($infoRequisicao, 'info da requisicao na dao do microservico', false);
 		//pre($msgErroCurl, 'msg de erro na dao do microservico', true);

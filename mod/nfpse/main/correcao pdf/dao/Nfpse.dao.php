@@ -153,7 +153,8 @@ class NfpseDAO {
 	public function __construct($empresaAcesso) {
 		// Define a URL para acesso conforme ambiente que esta usando o microservico
 		$dominio = filter_input(INPUT_SERVER, 'HTTP_HOST', FILTER_SANITIZE_STRING);
-		$ambienteAcessar =  'producao';
+		$ambienteAcessar = ((strpos($dominio, '192.168') !== false || strpos($dominio, 'localhost') !== false || strpos($dominio, 'dev.') !== false || strpos($dominio, 'sistemas.') !== false)) ? 'homologacao'
+				: 'producao';
 
 		// Tarefa #52555 - Alteração paliativa para caso o endereço de acesso ao microserviço for os IPs abaixo, definir como produção
 		if (
@@ -209,8 +210,8 @@ class NfpseDAO {
 					'grant_type' => 'client_credentials'
 				);
 
-				$this->_clientId = 'consulta2-nfpse-client';
-				$this->_clientSecret = '7077dbc51dec13a289ece2177cc6efa8';
+				$this->_clientId = 'consulta-nfpse-client';
+				$this->_clientSecret = '2ca53c015bef55767f7064d1c5159d45';
 			}
 
 			// Base64 do client_id:client_secret para o HEADER
@@ -547,7 +548,7 @@ class NfpseDAO {
 			$resultado = base64_encode($resultado);
 		}
 
-		/*$arrInserir = [
+		$arrInserir = [
 			'lrn_recurso' => $urlCompleta,
 			'lrn_verbo' => $verbo,
 			'lrn_headers' => json_encode($arrHeaders),
@@ -557,7 +558,7 @@ class NfpseDAO {
 		];
 
 		$this->getCon()->AutoExecute('log.log_requisicao_nfpse', $arrInserir);
-*/
+
 		//pre($resultado, 'resultado na dao do microservico', false);
 		//pre($infoRequisicao, 'info da requisicao na dao do microservico', false);
 		//pre($msgErroCurl, 'msg de erro na dao do microservico', true);

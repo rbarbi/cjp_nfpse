@@ -89,7 +89,7 @@ class NfpseAction extends DefaultAction {
 			// Chama o método específico no Service para cancelar a nota
 			$dadosNota = $this->service->cancelarNota();
 			$dadosIdNota = $this->service->consultarIdNota($post['numeroSerie']);
-			$dadosPdfNota = $this->service->gerarPDFNota($post['numeroSerie'], $dadosIdNota['idNota'], $dadosIdNota['cmcNota']);
+			$dadosPdfNota = $this->service->gerarPDFNota($dadosIdNota['idNota']);
 
 			// Nota e PDF devidamente gerados, cria um array e retorna
 			$arrRetorno = array(
@@ -147,7 +147,7 @@ class NfpseAction extends DefaultAction {
 			foreach ($dadosPost['series'] as $numeroSerie) {
 				$dadosIdNota = $this->service->consultarIdNota($numeroSerie);
 				$dadosXmlNota = $this->service->retornarXMLNota($dadosIdNota['idNota'], $dadosIdNota['cmcNota']);
-				$dadosPdfNota = $this->service->gerarPDFNota($numeroSerie, $dadosIdNota['idNota'], $dadosIdNota['cmcNota']);
+				$dadosPdfNota = $this->service->gerarPDFNota($dadosIdNota['idNota']);
 
 				// Nota e PDF devidamente gerados, cria um array e retorna
 				$arrRetorno[] = [
