@@ -1,4 +1,5 @@
 <?php
+
 include_once ('./lib/gama/base/Main.php');
 $app = MainGama::getInstanceOf();
 if(isset($_POST['amp;dadosNota'])){

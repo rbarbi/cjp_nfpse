@@ -42,33 +42,35 @@ class NfpseService extends NfpseBaseService {
 			/*
 			 * ANTES de enviar os dados para a geração do XML, faz a consulta das retenções caso for necessário
 			 */
-			$strDadosAdicionais = $dadosPost['dadosNota']['dadosAdicionais'];
+                        if(!empty($dadosPost['dadosNota']['dadosAdicionais'])){
+                            $strDadosAdicionais = $dadosPost['dadosNota']['dadosAdicionais'];
 
-			// 1 - Para INFODIGI: todas as retenções do regime tributário MAIS retenção do ISS
-			if (strpos($strDadosAdicionais, '[CONSULTAR_TODAS_RETENCOES]') !== false) {
-				$dadosRetencoes = $this->getDaoObject()->retornaDadosImpostosRetidos(array(
-					'valor_unitario' => $dadosPost['dadosNota']['valor_unitario'],
-					'ccn_regime_tributario' => $dadosPost['dadosNota']['ccn_regime_tributario'],
-					'ccn_possui_convenio_uniao' => $dadosPost['dadosNota']['ccn_possui_convenio_uniao'],
-					'ccn_retem_iss' => $dadosPost['dadosNota']['ccn_retem_iss'],
-					'ccn_percentual_iss' => $dadosPost['dadosNota']['ccn_percentual_iss']
-				));
+                            // 1 - Para INFODIGI: todas as retenções do regime tributário MAIS retenção do ISS
+                            if (strpos($strDadosAdicionais, '[CONSULTAR_TODAS_RETENCOES]') !== false) {
+                                    $dadosRetencoes = $this->getDaoObject()->retornaDadosImpostosRetidos(array(
+                                            'valor_unitario' => $dadosPost['dadosNota']['valor_unitario'],
+                                            'ccn_regime_tributario' => $dadosPost['dadosNota']['ccn_regime_tributario'],
+                                            'ccn_possui_convenio_uniao' => $dadosPost['dadosNota']['ccn_possui_convenio_uniao'],
+                                            'ccn_retem_iss' => $dadosPost['dadosNota']['ccn_retem_iss'],
+                                            'ccn_percentual_iss' => $dadosPost['dadosNota']['ccn_percentual_iss']
+                                    ));
 
-				$dadosPost['dadosNota']['dadosAdicionais'] = str_replace('[CONSULTAR_TODAS_RETENCOES]', $dadosRetencoes['observacoes'], $strDadosAdicionais);
-			}
+                                    $dadosPost['dadosNota']['dadosAdicionais'] = str_replace('[CONSULTAR_TODAS_RETENCOES]', $dadosRetencoes['observacoes'], $strDadosAdicionais);
+                            }
 
-			// 1 - Para POL: Somente a retenção do ISS
-			if (strpos($strDadosAdicionais, '[CONSULTAR_SOMENTE_ISS]') !== false) {
-				$dadosRetencoes = $this->getDaoObject()->retornaDadosImpostosRetidos(array(
-					'valor_unitario' => $dadosPost['dadosNota']['valor_unitario'],
-					'ccn_regime_tributario' => 'N',
-					'ccn_possui_convenio_uniao' => 'N',
-					'ccn_retem_iss' => $dadosPost['dadosNota']['ccn_retem_iss'],
-					'ccn_percentual_iss' => $dadosPost['dadosNota']['ccn_percentual_iss']
-				));
+                            // 1 - Para POL: Somente a retenção do ISS
+                            if (strpos($strDadosAdicionais, '[CONSULTAR_SOMENTE_ISS]') !== false) {
+                                    $dadosRetencoes = $this->getDaoObject()->retornaDadosImpostosRetidos(array(
+                                            'valor_unitario' => $dadosPost['dadosNota']['valor_unitario'],
+                                            'ccn_regime_tributario' => 'N',
+                                            'ccn_possui_convenio_uniao' => 'N',
+                                            'ccn_retem_iss' => $dadosPost['dadosNota']['ccn_retem_iss'],
+                                            'ccn_percentual_iss' => $dadosPost['dadosNota']['ccn_percentual_iss']
+                                    ));
 
-				$dadosPost['dadosNota']['dadosAdicionais'] = str_replace('[CONSULTAR_SOMENTE_ISS]', $dadosRetencoes['observacoes'], $strDadosAdicionais);
-			}
+                                    $dadosPost['dadosNota']['dadosAdicionais'] = str_replace('[CONSULTAR_SOMENTE_ISS]', $dadosRetencoes['observacoes'], $strDadosAdicionais);
+                            }
+                        }
 
 			// Gera o XML com os dados que foram postados na requisição
 			$dadosStrXML = UtilsNFPSe::gerarXMLrequisicao($dadosPost['dadosNota'], $aedf, $idCNAE);
@@ -80,9 +82,10 @@ class NfpseService extends NfpseBaseService {
 			$nomeCertificado = MainGama::getApp()->getConfig("nome_certificado-{$dadosPost['emp']}");
 			$senhaCertificado = MainGama::getApp()->getConfig("senha_certificado-{$dadosPost['emp']}");
 			$pathCertificado = dirname(dirname(__DIR__)).'/certificado-digital/'.$nomeCertificado;
+//                        pred(dirname(dirname(__DIR__)).'/certificado-digital/'.$nomeCertificado);
 			$strCertificado = file_get_contents($pathCertificado);
 			$objCertificado = Certificate::readPfx($strCertificado, $senhaCertificado);
-
+                        pred($objCertificado);
 			// Chama a assinatura digital do XML com o certificado da empresa que está gerando a nota fiscal
 			$strXMLAssinada = Signer::sign($objCertificado, $dadosStrXML['conteudoXML'], 'xmlProcessamentoNfpse', '', OPENSSL_ALGO_SHA1, [true, false, null, null], '');
 
